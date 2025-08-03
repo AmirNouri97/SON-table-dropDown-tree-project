@@ -38,7 +38,9 @@
   --color-black: #000;
   --color-black-half: #0005;
   --color-black-opacity-half: #0000000b;
+  --color-black-half-2: #d4d4d4;
   --color-gray: #676767;
+  --color-gray-light: #bbbbbb;
   --color-gray-dark: #333;
   --color-gray-60: #fff4;
   --color-gray-40: #fff5;
@@ -84,6 +86,7 @@ body {
   backdrop-filter: blur(7px);
   box-shadow: 0 4px 8px var(--color-black-half);
   border-radius: 8px;
+  padding-bottom: 16px;
 }
 .table {
   background-color: var(--color-gray-10);
@@ -91,6 +94,7 @@ body {
   box-shadow: 0 4px 8px var(--color-black-half);
   border-radius: 8px;
   width: 100%;
+  border-collapse: collapse;
 }
 
 .table__column {
@@ -98,14 +102,16 @@ body {
 }
 .table__header__section {
   width: 100%;
-  height: 10%;
+  height: 16%;
   border-radius: 8px 8px 0 0;
   background-color: var(--color-gray-40);
   padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
+
 .table__header__section__title {
   font-size: 32px;
   font-weight: 600;
@@ -113,19 +119,34 @@ body {
   text-shadow: 0 0 16px var(--color-gray);
 }
 .table__body__section {
-  display: flex;
-  align-items: center;
   width: 100%;
-  max-height: 89%;
-  border-radius: 6px;
-  padding: 12px 16px;
   overflow-y: auto;
-  overflow-x: auto;
+  border-radius: 6px;
+  padding: 0 16px;
+}
+.table__body__section {
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--color-white-100);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-light);
+    border-radius: 4px;
+    border: 2px solid var(--color-white-100);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-gray);
+    cursor: pointer;
+  }
 }
 
-.table__header {
-  background-color: var(--color-black-opacity-half);
-}
 .table__body {
   display: flex;
   justify-content: center;
@@ -135,8 +156,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--color-gray-light);
+  background-color: var(--color-gray-40);
   padding: 16px 0px;
+}
+
+.table__header {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: var(--color-black-half-2);
 }
 .table__rows:nth-child(even) {
   background-color: var(--color-black-opacity-half);
@@ -145,11 +174,13 @@ body {
 .table__head {
   font-size: 20px;
   text-align: center;
-  width: 180px;
+  width: 160px;
+  padding: 10px;
+  text-align: center;
 }
 .table__data:nth-child(2),
 .table__head:nth-child(2) {
-  width: 240px;
+  width: 280px;
 }
 .table__data--price {
   direction: ltr;
@@ -164,12 +195,15 @@ body {
 .pending {
   background-color: var(--color-pending);
   color: var(--color-pending-text);
+  font-weight: bold;
 }
 .cancelled {
   background-color: var(--color-cancelled);
   color: var(--color-cancelled-text);
+  font-weight: bold;
 }
 .status {
   padding: 6px 8px;
   border-radius: 20px;
+  font-weight: bold;
 }
